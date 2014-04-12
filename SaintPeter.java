@@ -36,7 +36,7 @@ public class SaintPeter
         // Assume that x and y map to cooresponging pixels in the
         // specified images.
         // System.out.println("Writing out control image.");
-        File ctrlFile = new File(new String("/Users/robert/code/projects/minecraft_fishing/ctrl.png"));
+        File ctrlFile = new File(new String("ctrl.png"));
         try
         {
             ImageIO.write(ctrlImg, "png", ctrlFile);
@@ -46,7 +46,7 @@ public class SaintPeter
         }
         
         // System.out.println("Writing out comparison image.");
-        File compFile = new File(new String("/Users/robert/code/projects/minecraft_fishing/comp.png"));
+        File compFile = new File(new String("comp.png"));
         try
         {
             ImageIO.write(compImg, "png", compFile);
