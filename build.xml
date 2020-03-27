@@ -1,0 +1,77 @@
+<project name="FishCraft" default="compile" basedir=".">
+
+  <description>
+    FishCraft Ant Build File
+  </description>
+
+  <!-- 
+  <tstamp>
+    <format property="TODAY"
+          pattern="d-MMMM-yyyy"
+          locale="en,UK"/>
+  </tstamp>
+  -->
+  <!-- use the TODAY variable that is created by tstamp -->
+  <tstamp>
+    <format property="TODAY" pattern="yyMMdd-HHmmss"  locale="en,US" />
+  </tstamp>
+
+  <manifest file="MANIFEST.MF">
+    <attribute name="Built-By" value="${manifest.built.by}"/>
+    <attribute name="Built-Date" value="${TODAY}"/>
+    <attribute name="Main-Class" value="FishCraft"/>
+    <attribute name="Class-Path" value="build" />
+  </manifest>
+
+  <!-- set global properties for this build -->
+  <property name="src" location="src/"/>
+  <!-- <property name="build" location="build"/> -->
+  <!-- <property name="jar" location="jar"/>
+  <property name="build.sysclasspath" value="last"/> -->
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="build/classes"/>
+  </target>
+
+  <target name="compile" depends="init" description="compile the source">
+    <!-- <mkdir dir="build/fishcraft"/>
+    <echo>Compiling ${ant.project.name}</echo> -->
+    <javac includeantruntime="false" srcdir="src/" destdir="build/classes"/>
+      
+    <copy todir="build/res">
+      <fileset dir="src/res"/>
+    </copy>
+  </target>
+
+  <target name="jar" depends="compile">
+    <mkdir dir="build/jar"/>
+    <jar destfile="build/jar/FishCraft.jar" basedir="build/classes">
+        <manifest>
+            <attribute name="Main-Class" value="FishCraft"/>
+        </manifest>
+    </jar>
+
+    <copy todir="build/classes/res">
+      <fileset dir="src/res"/>
+    </copy>
+  </target>
+
+  <target name="run" depends="jar">
+    <!-- <java classname="FishCraft">
+        <classpath refid="build/classes" />
+    </java> -->
+
+    <!-- <classpath>
+      <pathelement path="build/classes" />
+    </classpath> -->
+    <java jar="build/jar/FishCraft.jar" fork="true"/>      
+  </target>
+
+  <target name="clean" description="clean up">
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="build"/>
+  </target>
+</project>
