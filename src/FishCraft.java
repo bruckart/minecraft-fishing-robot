@@ -109,8 +109,8 @@ class FishCraft
     	{
         	public void run()
         	{
-        		logger.info("Taking Snapshot at Coordinates: " + m_x + ", " + m_y);
-        		logger.info("Image Width: " + m_w + ", Image Height: " + m_h);
+        		LOGGER.info("Taking Snapshot at Coordinates: " + m_x + ", " + m_y);
+        		LOGGER.info("Image Width: " + m_w + ", Image Height: " + m_h);
 
 				captureScreenshot();
         	}
